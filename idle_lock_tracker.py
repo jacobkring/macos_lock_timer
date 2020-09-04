@@ -12,9 +12,9 @@ def get_idle_time():
 	return idle_time
 
 def lock_after_idle_time_limit(idle_time):
-	idle_time_limit = os.environ.get('SCREEN_LOCK_TIME_LIMIT', '600')
+	idle_time_limit = "600"
 	d=Quartz.CGSessionCopyCurrentDictionary() # checks if screen is locked already - dont need to lock a locked screen
-	print(idle_time_limit, idle_time)
+	print(idle_time, idle_time_limit, idle_time >= idle_time_limit)
 	if idle_time >= idle_time_limit and not d.get("CGSSessionScreenIsLocked", 0):
 		try:
 			subprocess.call("""osascript<<END
